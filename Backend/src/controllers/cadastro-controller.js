@@ -53,6 +53,7 @@ exports.listarCadastros = (req, res) => {
                     message: 'Não foi possível listar os cadastros'
                 });
             }else{
+                console.log('Cadastros encontrados')
                 res.json({
                     status: 'ok',
                     message: cadastros

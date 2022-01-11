@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import { Button, Grid, TextField } from '@material-ui/core';
 
+import axios from 'axios';
+
 function initialState(){
     return { nome: '' }
 }
@@ -9,11 +11,17 @@ function initialState(){
 const Home = () => {
 
     const [ values, setValues ] = useState(initialState);
+    const [ valor, setValor ] = useState('');
 
     function PegaDados({ nome }) {
         
-        console.log(nome);
+        // console.log(nome);
 
+        axios.get('http://localhost:5000/api/cadastro')
+            .then( (response) => {
+                let dados = response.data.message;
+                console.log(dados);
+            })
     }
 
     function onChange(event){
@@ -35,10 +43,10 @@ const Home = () => {
         <Grid container>
             <form onSubmit={onSubmit}>
                 <TextField
-                    required
+                    // required
                     fullWidth
                     id='nome'
-                    label='Nome'
+                    label={valor}
                     name='nome'
                     onChange={onChange}
                     value={values.name}
